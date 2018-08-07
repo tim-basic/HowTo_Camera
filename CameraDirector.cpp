@@ -25,9 +25,9 @@ void ACameraDirector::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	// float to define starting point of count down
-	const float TimeBetweenCameraChanges = 2.0f;
+	const float TimeBetweenCameraChanges = 5.0f;
 	// float to define the value used to blend scenes.
-	const float SmoothBlendTime = 0.75f;
+	const float SmoothBlendTime = 2.0f;
 
 	// minuses 2.0 with DeltaTime;
 	TimeToNextCameraChange -= DeltaTime;
@@ -51,11 +51,9 @@ void ACameraDirector::Tick(float DeltaTime)
 			if ((OurPlayerController->GetViewTarget() != CameraOne) && (CameraOne != nullptr))
 			{	
 				// Set camera view to camera one
-				// blend to camera one.
-				OurPlayerController->SetViewTargetWithBlend(CameraTwo, SmoothBlendTime);
+				// Cut instantly to camera one.
+				OurPlayerController->SetViewTarget(CameraOne);
 			}
-
-			// else if not OPC != CameraTwo and CameraTwo not a NULL pointer...
 			else if ((OurPlayerController->GetViewTarget() != CameraTwo) && (CameraTwo != nullptr))
 			{
 				// Blend smoothly to camera two.
